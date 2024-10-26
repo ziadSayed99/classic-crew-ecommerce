@@ -8,6 +8,6 @@ export interface Clothes {
   name: string;
   price: number;
   category: string;
-  image: Image;
+  image: string;
   description: string;
 }
