@@ -1,0 +1,30 @@
+{
+  "products": [
+    { "id": 1, "name": "Shirt", "price": 20, "category": "men" },
+    { "id": 2, "name": "Pants", "price": 40, "category": "men" },
+    { "id": 3, "name": "Shirt", "price": 20, "category": "kids" },
+    { "id": 4, "name": "Pants", "price": 40, "category": "kids" }
+  ],
+  "product_images": [
+    {
+      "id": 1,
+      "productId": 1,
+      "src": "http://localhost:5000/products/p-1.webp"
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "src": "http://localhost:5000/images/p-4.webp"
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "src": "http://localhost:5000/images/p-7.webp"
+    },
+    {
+      "id": 4,
+      "productId": 2,
+      "src": "http://localhost:5000/images/p-20.webp"
+    }
+  ]
+}
