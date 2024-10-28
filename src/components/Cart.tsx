@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useState } from "react";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -8,58 +6,20 @@ import {
   PlusIcon,
   MinusIcon,
 } from "@heroicons/react/24/solid"; // New icons for cart and qty control
+import { useSelector } from "react-redux";
+import { Product } from "../data/product";
 
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
+type Cart = {
+  cart: {
+    items: Product[];
+    totalQty: number;
+    totalPrice: number;
+  };
+};
 
 export default function Cart() {
+  const cart = useSelector((state: Cart) => state.cart);
   const [open, setOpen] = useState(false);
-  const [cartItems, setCartItems] = useState(products);
-
-  // Function to increase the quantity of a product
-  const increaseQty = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  // Function to decrease the quantity of a product
-  const decreaseQty = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
 
   return (
     <div>
@@ -107,43 +67,40 @@ export default function Cart() {
                     <div className="mt-8">
                       <div className="flow-root">
                         <ul className="-my-6 divide-y divide-gray-200">
-                          {cartItems.map((product) => (
+                          {cart?.items.map((product: Product) => (
                             <li key={product.id} className="flex py-6">
                               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                 <img
-                                  src={product.imageSrc}
-                                  alt={product.imageAlt}
+                                  src={product.image}
+                                  alt={product.image}
                                   className="h-full w-full object-cover object-center"
                                 />
                               </div>
 
                               <div className="ml-4 flex flex-1 flex-col">
                                 <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
-                                      <a href={product.href}>{product.name}</a>
+                                  <div className="flex justify-between text-base font-medium text-gray-900 mt-3">
+                                    <h3 className="mr-4 font-bold fs-2">
+                                      <a href="#">{product.name}</a>
                                     </h3>
-                                    <p className="ml-4">{product.price}</p>
+                                    <p className="ml-4">{product.price} EGP</p>
                                   </div>
-                                  <p className="mt-1 text-sm text-gray-500">
-                                    {product.color}
-                                  </p>
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
                                   <div className="flex items-center space-x-2">
                                     <button
                                       type="button"
-                                      onClick={() => decreaseQty(product.id)}
+                                      // onClick={() => decreaseQty(product.id)}
                                       className="p-1 text-gray-700 border rounded-md hover:bg-gray-100"
                                     >
                                       <MinusIcon className="h-5 w-5" />
                                     </button>
                                     <p className="text-gray-700">
-                                      {product.quantity}
+                                      {product.qty}
                                     </p>
                                     <button
                                       type="button"
-                                      onClick={() => increaseQty(product.id)}
+                                      // onClick={() => increaseQty(product.id)}
                                       className="p-1 text-gray-700 border rounded-md hover:bg-gray-100"
                                     >
                                       <PlusIcon className="h-5 w-5" />

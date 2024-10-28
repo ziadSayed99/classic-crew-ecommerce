@@ -1,5 +1,7 @@
 import { Clothes } from "../data/clothes";
 import React from "react";
+import { addToCart } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 function ProdcutsCard({
   prodcuts,
@@ -9,59 +11,90 @@ function ProdcutsCard({
   isHomePage: boolean;
 }) {
   console.log(prodcuts);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (selectedProductId: number) => {
+    const selectedProduct = prodcuts.find(
+      (product) => product.id === selectedProductId
+    );
+
+    if (selectedProduct) {
+      dispatch(addToCart({ product: selectedProduct, qty: 1 }));
+    } else {
+      console.error("Selected product not found");
+    }
+  };
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {prodcuts.map((prodcut) => (
-        <div
-          key={prodcut.id}
-          className={`relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group ${
-            !isHomePage ? "h-56" : ""
-          }`}
-        >
-          <div className="relative h-56 m-2.5 overflow-hidden rounded-md">
-            <img
-              src={prodcut.image}
-              alt={prodcut.name}
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
-            />
+    <React.Fragment>
+      {isHomePage && (
+        <>
+          <div>
+            <h2 className="text-4xl font-bold text-black text-center mb-2 mt-5">
+              Featured Products
+            </h2>
           </div>
-          <div className="p-4">
-            <h6 className="mb-2 text-slate-800 text-xl font-semibold">
-              {prodcut.name} {/* Display product name */}
-            </h6>
-          </div>
-          <div className="px-4 pb-4 pt-0 mt-2 transition-opacity duration-300">
-            {/* Show price only if isHomepage is false */}
-            {!isHomePage && (
-              <p className="text-slate-800 text-lg font-semibold">
-                Price: ${prodcut.price} {/* Display product price */}
-              </p>
-            )}
-            {/* Show price when hovering only if isHomepage is true */}
-            {isHomePage && (
-              <p className="text-slate-800 text-lg font-semibold">
-                Price: ${prodcut.price}
-              </p>
-            )}
-            <button className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700">
-              <span
-                className={`group-hover:hidden ${!isHomePage ? "hidden" : ""}`}
-              >
-                +
-              </span>
-              <span
-                className={`hidden group-hover:inline ${
-                  isHomePage ? "inline" : "hidden"
+          <div className="grid grid-cols-12 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 lg:mx-24 ">
+            {prodcuts.map((prodcut) => (
+              <div
+                key={prodcut.id}
+                className={`relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group lg:w-72 ${
+                  !isHomePage ? "h-56" : ""
                 }`}
               >
-                Add to Cart
-              </span>
-            </button>
+                <div className="h-62 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                  <img
+                    src={prodcut.image}
+                    alt={prodcut.image}
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+
+                <div className="p-4">
+                  <h6 className="mb-2 text-slate-800 text-xl font-semibold flex justify-between items-center">
+                    {prodcut.name} {/* Display product name */}
+                    <button
+                      onClick={() => handleAddToCart(prodcut.id)}
+                      className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700"
+                    >
+                      <span
+                        className={`group-hover:hidden ${
+                          !isHomePage ? "hidden" : ""
+                        }`}
+                      >
+                        +
+                      </span>
+                      <span
+                        className={`hidden group-hover:inline ${
+                          isHomePage ? "inline" : "hidden"
+                        }`}
+                      >
+                        Add to Cart
+                      </span>
+                    </button>
+                  </h6>
+                </div>
+
+                <div className="px-4 pb-4 pt-0 mt-2 transition-opacity duration-300">
+                  {!isHomePage && (
+                    <p className="text-slate-800 text-lg font-semibold">
+                      Price: {prodcut.price} {/* Display product price */}
+                    </p>
+                  )}
+                  {isHomePage && (
+                    <div>
+                      <p className="text-slate-800 text-lg font-semibold">
+                        Price: {prodcut.price} EGP
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
+        </>
+      )}
+    </React.Fragment>
   );
 }
 
