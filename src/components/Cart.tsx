@@ -6,8 +6,9 @@ import {
   PlusIcon,
   MinusIcon,
 } from "@heroicons/react/24/solid"; // New icons for cart and qty control
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../data/product";
+import { addQty, decreaseQty, removeItem } from "../store/cartSlice";
 
 type Cart = {
   cart: {
@@ -19,7 +20,19 @@ type Cart = {
 
 export default function Cart() {
   const cart = useSelector((state: Cart) => state.cart);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+
+  const handleIncreaseQty = (id: number) => {
+    dispatch(addQty(id));
+  };
+  const handleDecreaseQty = (id: number) => {
+    dispatch(decreaseQty(id));
+  };
+
+  const handleRemoveItem = (id: number) => {
+    dispatch(removeItem(id));
+  };
 
   return (
     <div>
@@ -90,7 +103,9 @@ export default function Cart() {
                                   <div className="flex items-center space-x-2">
                                     <button
                                       type="button"
-                                      // onClick={() => decreaseQty(product.id)}
+                                      onClick={() =>
+                                        handleDecreaseQty(product.id)
+                                      }
                                       className="p-1 text-gray-700 border rounded-md hover:bg-gray-100"
                                     >
                                       <MinusIcon className="h-5 w-5" />
@@ -100,7 +115,9 @@ export default function Cart() {
                                     </p>
                                     <button
                                       type="button"
-                                      // onClick={() => increaseQty(product.id)}
+                                      onClick={() =>
+                                        handleIncreaseQty(product.id)
+                                      }
                                       className="p-1 text-gray-700 border rounded-md hover:bg-gray-100"
                                     >
                                       <PlusIcon className="h-5 w-5" />
@@ -109,6 +126,9 @@ export default function Cart() {
 
                                   <div className="flex">
                                     <button
+                                      onClick={() =>
+                                        handleRemoveItem(product.id)
+                                      }
                                       type="button"
                                       className="font-medium text-indigo-600 hover:text-indigo-500"
                                     >
@@ -127,7 +147,7 @@ export default function Cart() {
                   <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>$262.00</p>
+                      <p>{cart?.totalPrice} EGP</p>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">
                       Shipping and taxes calculated at checkout.

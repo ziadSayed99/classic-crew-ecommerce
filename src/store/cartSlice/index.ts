@@ -62,7 +62,7 @@ const cartSlice = createSlice({
       }
     },
 
-    addQty: (state: CartState, action: PayloadAction<string>) => {
+    addQty: (state: CartState, action: PayloadAction<number>) => {
       const newArr = state.items.map((item) => {
         if (item.id === action.payload) {
           item.qty++;
@@ -78,7 +78,7 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    removeItem: (state: CartState, action: PayloadAction<string>) => {
+    removeItem: (state: CartState, action: PayloadAction<number>) => {
       const newArr = state.items.filter((item) => item.id !== action.payload);
       const prices = newArr.map((item) => item.price); // Ensure Product includes `price`
       state.totalPrice = calcTotal(prices);
@@ -87,7 +87,7 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    decreaseQty: (state: CartState, action: PayloadAction<string>) => {
+    decreaseQty: (state: CartState, action: PayloadAction<number>) => {
       const newArr = state.items.map((item) => {
         if (item.id === action.payload && item.qty > 1) {
           item.qty--;

@@ -31,6 +31,38 @@
       "category": "kids",
       "image": "/assets/products/p-20.webp",
       "description": "kids clothes"
+    },
+    {
+      "id": 5,
+      "name": "Shirt",
+      "price": 20,
+      "category": "men",
+      "image": "/assets/products/p-1.webp",
+      "description": "men clothes"
+    },
+    {
+      "id": 6,
+      "name": "Pants",
+      "price": 40,
+      "category": "men",
+      "image": "/assets/products/p-4.webp",
+      "description": "men clothes"
+    },
+    {
+      "id": 7,
+      "name": "Shirt",
+      "price": 20,
+      "category": "kids",
+      "image": "/assets/products/p-7.webp",
+      "description": "kids clothes"
+    },
+    {
+      "id": 8,
+      "name": "Pants",
+      "price": 40,
+      "category": "kids",
+      "image": "/assets/products/p-20.webp",
+      "description": "kids clothes"
     }
   ]
 }

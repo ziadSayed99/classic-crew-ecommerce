@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Cart from "./Cart";
 import AccountImg from "./AccountImg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveCart } from "../store/cartSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(saveCart());
+  }, []);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState("Home");
   const navigate = useNavigate();
@@ -47,7 +54,7 @@ function Navbar() {
           {["Home", "Men", "Kids", "Search"].map((section) => (
             <button
               key={section}
-              className={`flex items-center gap-x-1 text-sm font-semibold leading-6 cursor-pointer text-black hover:text-cyan-500 ${
+              className={`flex items-center gap-x-1 text-md font-semibold leading-6 cursor-pointer text-black hover:text-cyan-500 ${
                 active === section && "text-cyan-500"
               }`}
               onClick={() => handleNavigation(section)}

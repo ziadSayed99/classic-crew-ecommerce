@@ -14,7 +14,7 @@ function HeroSection() {
         backgroundRepeat: "no-repeat", // Prevents the image from repeating
       }}
     >
-      <div className="grid max-w-screen-xl px-4 py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12  sm:grid-cols-12">
+      <div className="grid max-w-screen-xl px-4 py-20 lg:gap-8 xl:gap-0 lg:py-36 lg:grid-cols-12  sm:grid-cols-12">
         <div className="lg:col-span-4 md:col-span-6">
           <blockquote className="text-4xl italic font-semibold text-gray-900 dark:text-white">
             <h1 className="text-2xl md:text-3xl lg:text-4xl lg:ml-32 mt-36 mb-32">

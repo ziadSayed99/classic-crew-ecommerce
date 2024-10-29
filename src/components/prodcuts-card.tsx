@@ -30,17 +30,15 @@ function ProdcutsCard({
       {isHomePage && (
         <>
           <div>
-            <h2 className="text-4xl font-bold text-black text-center mb-2 mt-5">
+            <h2 className="text-4xl font-bold text-black text-center mb-2 mt-2">
               Featured Products
             </h2>
           </div>
-          <div className="grid grid-cols-12 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 lg:mx-24 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 lg:mx-40">
             {prodcuts.map((prodcut) => (
               <div
                 key={prodcut.id}
-                className={`relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group lg:w-72 ${
-                  !isHomePage ? "h-56" : ""
-                }`}
+                className={`relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group w-full sm:w-auto`}
               >
                 <div className="h-62 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                   <img
@@ -52,7 +50,7 @@ function ProdcutsCard({
 
                 <div className="p-4">
                   <h6 className="mb-2 text-slate-800 text-xl font-semibold flex justify-between items-center">
-                    {prodcut.name} {/* Display product name */}
+                    {prodcut.name}
                     <button
                       onClick={() => handleAddToCart(prodcut.id)}
                       className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700"
@@ -76,18 +74,9 @@ function ProdcutsCard({
                 </div>
 
                 <div className="px-4 pb-4 pt-0 mt-2 transition-opacity duration-300">
-                  {!isHomePage && (
-                    <p className="text-slate-800 text-lg font-semibold">
-                      Price: {prodcut.price} {/* Display product price */}
-                    </p>
-                  )}
-                  {isHomePage && (
-                    <div>
-                      <p className="text-slate-800 text-lg font-semibold">
-                        Price: {prodcut.price} EGP
-                      </p>
-                    </div>
-                  )}
+                  <p className="text-slate-800 text-lg font-semibold">
+                    Price: {prodcut.price} EGP
+                  </p>
                 </div>
               </div>
             ))}

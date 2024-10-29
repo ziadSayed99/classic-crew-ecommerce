@@ -27,7 +27,7 @@ function Body() {
   return (
     <div>
       <div className="bg-white">
-        <h2 className="text-4xl font-bold text-black text-center mb-2 mt-5">
+        <h2 className="text-xl lg:text-4xl font-bold text-black text-center mb-10 lg:mb-10 mt-5">
           Bold & Trendy: Fashion for Every <br /> Generation
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 pr-10 pl-10">
@@ -44,7 +44,7 @@ function Body() {
                     alt={callout.imageAlt}
                     className="hover:opacity-75 transition-transform transform hover:scale-125 rounded-md w-full "
                     style={{
-                      height: "470px", // Set a fixed height for all images (you can adjust this value)
+                      height: "550px", // Set a fixed height for all images (you can adjust this value)
                       objectFit: "cover", // Ensures the image covers the container while maintaining aspect ratio
                       backgroundPosition: "top center", // Centers the image
                       backgroundRepeat: "no-repeat", // Prevents the image from repeating
