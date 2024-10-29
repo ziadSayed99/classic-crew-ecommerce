@@ -45,7 +45,7 @@ function Navbar() {
             href="/"
             className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3 lg:mt-0"
           >
-            Clothes Store
+            Classic Crew
           </a>
         </div>
 
@@ -108,7 +108,7 @@ function Navbar() {
               href="/"
               className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3"
             >
-              Clothes Store
+              Classic Crew
             </a>
             <button
               type="button"

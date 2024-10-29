@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Clothes } from "../data/clothes";
 import SquareLoadingSkeleton from "../components/SquareLoadingSkeleton";
 import ProdcutsCard from "../components/prodcuts-card";
+import AppPart from "../components/app";
 function HomePage() {
   const [prodcuts, setProducts] = useState<Clothes[]>([]);
   const [loading, setLoading] = useState(true);
@@ -58,6 +59,9 @@ function HomePage() {
         </section>
         <section className="mt-24">
           <ProdcutsCard isHomePage={true} prodcuts={prodcuts} />
+        </section>
+        <section className="mt-24">
+          <AppPart />
         </section>
       </main>
       {/* <footer>
