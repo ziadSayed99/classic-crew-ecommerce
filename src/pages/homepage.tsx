@@ -8,6 +8,7 @@ import { Clothes } from "../data/clothes";
 import SquareLoadingSkeleton from "../components/SquareLoadingSkeleton";
 import ProdcutsCard from "../components/prodcuts-card";
 import AppPart from "../components/app";
+import Footer from "../components/footer";
 function HomePage() {
   const [prodcuts, setProducts] = useState<Clothes[]>([]);
   const [loading, setLoading] = useState(true);
@@ -64,9 +65,9 @@ function HomePage() {
           <AppPart />
         </section>
       </main>
-      {/* <footer>
+      <footer>
         <Footer />
-      </footer> */}
+      </footer>
     </div>
   );
 }
