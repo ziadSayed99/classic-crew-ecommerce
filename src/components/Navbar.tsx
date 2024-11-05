@@ -126,7 +126,7 @@ function Navbar() {
                   <button
                     key={section}
                     className={`flex items-center gap-x-1 text-sm font-semibold leading-6 cursor-pointer text-black hover:text-cyan-500 ${
-                      active === section ? "text-cyan-500" : "text-black"
+                      active === section ? "text-cyan-500" : "text-gray-700"
                     }`}
                     onClick={() => handleNavigation(section)}
                   >

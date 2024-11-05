@@ -130,7 +130,7 @@ export default function Cart() {
                                         handleRemoveItem(product.id)
                                       }
                                       type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                                      className="font-medium text-gray-600 hover:text-cyan-500"
                                     >
                                       Remove
                                     </button>
@@ -153,7 +153,7 @@ export default function Cart() {
                       Shipping and taxes calculated at checkout.
                     </p>
                     <div className="mt-6">
-                      <button className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                      <button className="flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-500">
                         Checkout
                       </button>
                     </div>
@@ -163,7 +163,7 @@ export default function Cart() {
                         <button
                           type="button"
                           onClick={() => setOpen(false)}
-                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                          className="font-medium text-gray-700 hover:text-cyan-500"
                         >
                           Continue Shopping
                           <span aria-hidden="true"> &rarr;</span>

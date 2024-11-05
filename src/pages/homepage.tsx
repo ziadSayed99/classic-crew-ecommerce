@@ -9,6 +9,7 @@ import SquareLoadingSkeleton from "../components/SquareLoadingSkeleton";
 import ProdcutsCard from "../components/prodcuts-card";
 import AppPart from "../components/app";
 import Footer from "../components/footer";
+
 function HomePage() {
   const [prodcuts, setProducts] = useState<Clothes[]>([]);
   const [loading, setLoading] = useState(true);
@@ -17,18 +18,18 @@ function HomePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true); // Set loading to true before fetching
-        const products = await getClothes(); // Fetch the products
-        setProducts(products); // Set the products state
+        setLoading(true);
+        const products = await getClothes();
+        setProducts(products);
       } catch (err) {
-        console.error(err); // Log the error for debugging
-        setError("Failed to load products."); // Update error state
+        console.error(err);
+        setError("Failed to load products.");
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false);
       }
     };
 
-    fetchProducts(); // Call the fetch function
+    fetchProducts();
   }, []);
 
   if (loading) {
@@ -36,7 +37,7 @@ function HomePage() {
   }
 
   if (error) {
-    return console.log(error);
+    return <div className="text-red-500 text-center mt-10">{error}</div>;
   }
 
   return (
