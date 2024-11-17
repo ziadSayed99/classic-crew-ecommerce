@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Cart from "./Cart";
+import Cart from "./cart/Cart";
 import AccountImg from "./AccountImg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ function Navbar() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(saveCart());
+    window.scrollTo(0, 0);
   }, []);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

@@ -6,7 +6,7 @@ import { getClothes } from "../Apis/clothes";
 import { useState, useEffect } from "react";
 import { Clothes } from "../data/clothes";
 import SquareLoadingSkeleton from "../components/SquareLoadingSkeleton";
-import ProdcutsCard from "../components/prodcuts-card";
+import ProdcutsCard from "../components/product/prodcuts-card";
 import AppPart from "../components/app";
 import Footer from "../components/footer";
 

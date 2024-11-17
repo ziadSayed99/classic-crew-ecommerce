@@ -1,12 +1,12 @@
 export default function Footer() {
   return (
-    <footer className="w-full">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <footer className="w-full mx-auto">
+      <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 bg-[#FBFBFB]">
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8">
-          <div className="col-span-full  lg:col-span-2 lg:mb-0">
+          <div className="col-span-full  lg:col-span-2 lg:mb-0 lg:ml-36">
             <a
               href="/"
-              className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3 lg:mt-0"
+              className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3 lg:mt-0 "
             >
               Classic Crew
             </a>
@@ -80,6 +80,7 @@ export default function Footer() {
         </div>
         <div className="py-7 border-t border-gray-200">
           <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
+            <div></div>
             <span className="text-md text-gray-500 ">
               ©<a href="#">Classic Crew</a> 2024, All rights reserved.
             </span>

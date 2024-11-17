@@ -7,8 +7,8 @@ import {
   MinusIcon,
 } from "@heroicons/react/24/solid"; // New icons for cart and qty control
 import { useDispatch, useSelector } from "react-redux";
-import { Product } from "../data/product";
-import { addQty, decreaseQty, removeItem } from "../store/cartSlice";
+import { Product } from "../../data/product";
+import { addQty, decreaseQty, removeItem } from "../../store/cartSlice";
 
 type Cart = {
   cart: {

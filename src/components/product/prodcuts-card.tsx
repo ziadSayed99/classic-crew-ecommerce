@@ -1,8 +1,8 @@
-import { Clothes } from "../data/clothes";
-import React from "react";
-import { addToCart } from "../store/cartSlice";
+import { Clothes } from "../../data/clothes";
+import React, { useState } from "react";
+import { addToCart } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
-
+import ProductView from "./productView";
 function ProdcutsCard({
   prodcuts,
   isHomePage,
@@ -12,6 +12,15 @@ function ProdcutsCard({
 }) {
   console.log(prodcuts);
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleAddToCart = (selectedProductId: number) => {
     const selectedProduct = prodcuts.find(
@@ -34,7 +43,7 @@ function ProdcutsCard({
               Featured Products
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 lg:mx-40">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:mx-40 px-4">
             {prodcuts.map((prodcut) => (
               <div
                 key={prodcut.id}
@@ -83,7 +92,7 @@ function ProdcutsCard({
           </div>
         </>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  gap-4  mx-auto ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-4 gap-4  mx-auto ">
           {prodcuts.map((product) => (
             <div
               key={product.id}
@@ -100,11 +109,24 @@ function ProdcutsCard({
               <div className="p-4">
                 <h6 className="mb-2 text-slate-800 text-xl font-semibold flex justify-between items-center">
                   {product.name}
+                  <div>
+                    <button
+                      onClick={openModal}
+                      className="rounded-md bg-gray-700 py-2 px-4 text-sm text-white transition-shadow shadow-md hover:shadow-lg hover:bg-cyan-500"
+                    >
+                      View
+                    </button>
+                    <ProductView
+                      isOpen={isModalOpen}
+                      onClose={closeModal}
+                      product={product}
+                    />
+                  </div>
                   <button
                     onClick={() => handleAddToCart(product.id)}
-                    className="rounded-md bg-gray-700 py-2 px-4 text-sm text-white transition-shadow shadow-md hover:shadow-lg"
+                    className="rounded-md bg-gray-700 py-2 px-4 text-sm text-white transition-shadow shadow-md hover:shadow-lg hover:bg-cyan-500"
                   >
-                    View
+                    Add to Cart
                   </button>
                 </h6>
               </div>

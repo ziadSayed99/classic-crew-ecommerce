@@ -19,7 +19,7 @@ import {
   PlusIcon,
 } from "@heroicons/react/20/solid";
 
-import ProdcutsCard from "../components/prodcuts-card";
+import ProdcutsCard from "./product/prodcuts-card";
 import { Clothes } from "../data/clothes";
 
 const sortOptions = [

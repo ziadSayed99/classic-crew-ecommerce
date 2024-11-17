@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import SideBar from "../components/sidebar";
 import { Clothes } from "../data/clothes";
 import { getClothesByCategory } from "../Apis/clothes";
+import Navbar from "../components/Navbar";
+import Footer from "../components/footer";
 
 function ProductsPage() {
   const [prodcuts, setProducts] = useState<Clothes[]>([]);
@@ -18,7 +20,19 @@ function ProductsPage() {
 
   console.log(prodcuts);
 
-  return <SideBar products={prodcuts} />;
+  return (
+    <>
+      <header className="mb-12">
+        <Navbar />
+      </header>
+      <main>
+        <SideBar products={prodcuts} />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </>
+  );
 }
 
 export default ProductsPage;
