@@ -4,21 +4,26 @@ import { Clothes } from "../data/clothes";
 import { getClothesByCategory } from "../Apis/clothes";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
+import { useLocation } from "react-router-dom";
 
 function ProductsPage() {
+  const location = useLocation();
   const [prodcuts, setProducts] = useState<Clothes[]>([]);
+  const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const categoryName = params.get("name");
-    if (categoryName === "Men") {
-      getClothesByCategory("men").then((res) => setProducts(res));
-    } else if (categoryName === "Kids") {
-      getClothesByCategory("kids").then((res) => setProducts(res));
-    }
-  }, []);
+    const params = new URLSearchParams(location.search); // Use location.search
+    const newCategoryName = params.get("name");
 
-  console.log(prodcuts);
+    if (newCategoryName && newCategoryName !== categoryName) {
+      setCategoryName(newCategoryName);
+
+      // Fetch the products for the new category
+      getClothesByCategory(newCategoryName.toLowerCase()).then((res) =>
+        setProducts(res)
+      );
+    }
+  }, [location.search]);
 
   return (
     <>

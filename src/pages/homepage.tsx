@@ -45,7 +45,7 @@ function HomePage() {
       <Helmet>
         <meta charSet="utf-8" />
         <title>E-commerce</title>
-        <link rel="canonical" href="http://mysite.com/example" />
+        <link rel="canonical" href="#" />
       </Helmet>
       <header>
         <nav className="mb-24">

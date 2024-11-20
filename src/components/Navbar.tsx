@@ -3,16 +3,29 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Cart from "./cart/Cart";
 import AccountImg from "./AccountImg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveCart } from "../store/cartSlice";
 
 function Navbar() {
   const dispatch = useDispatch();
+  const location = useLocation();
   useEffect(() => {
     dispatch(saveCart());
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    // Extract the active section based on the URL
+    const path = location.pathname;
+    const params = new URLSearchParams(location.search);
+    const category = params.get("name");
+
+    if (path === "/") setActive("Home");
+    else if (path === "/products" && category === "Men") setActive("Men");
+    else if (path === "/products" && category === "Kids") setActive("Kids");
+    else if (path === "/search") setActive("Search");
+  }, [location]);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState("Home");
@@ -25,10 +38,10 @@ function Navbar() {
         navigate("/");
         break;
       case "Men":
-        navigate("/men");
+        navigate("/products?name=Men");
         break;
       case "Kids":
-        navigate("/kids");
+        navigate("/products?name=Kids");
         break;
       case "Search":
         navigate("/search");
@@ -55,8 +68,10 @@ function Navbar() {
           {["Home", "Men", "Kids", "Search"].map((section) => (
             <button
               key={section}
-              className={`flex items-center gap-x-1 text-md font-semibold leading-6 cursor-pointer text-black hover:text-cyan-500 ${
-                active === section && "text-cyan-500"
+              className={`flex items-center gap-x-1 text-md font-semibold leading-6 cursor-pointer ${
+                active === section
+                  ? "text-cyan-500"
+                  : "text-black hover:text-cyan-500"
               }`}
               onClick={() => handleNavigation(section)}
             >

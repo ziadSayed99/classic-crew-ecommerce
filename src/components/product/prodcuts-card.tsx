@@ -10,16 +10,19 @@ function ProdcutsCard({
   prodcuts: Clothes[];
   isHomePage: boolean;
 }) {
-  console.log(prodcuts);
+  // console.log(prodcuts);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Clothes | null>(null);
 
-  const openModal = () => {
+  const openModal = (product: Clothes) => {
+    setSelectedProduct(product); // Set the selected product
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedProduct(null);
   };
 
   const handleAddToCart = (selectedProductId: number) => {
@@ -47,7 +50,7 @@ function ProdcutsCard({
             {prodcuts.map((prodcut) => (
               <div
                 key={prodcut.id}
-                className={`relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group w-full sm:w-auto `}
+                className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group w-full"
               >
                 <div className="h-62 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                   <img
@@ -111,7 +114,7 @@ function ProdcutsCard({
                   {product.name}
                   <div>
                     <button
-                      onClick={openModal}
+                      onClick={() => openModal(product)}
                       className="rounded-md bg-gray-700 py-2 px-4 text-sm text-white transition-shadow shadow-md hover:shadow-lg hover:bg-cyan-500"
                     >
                       View
@@ -119,7 +122,7 @@ function ProdcutsCard({
                     <ProductView
                       isOpen={isModalOpen}
                       onClose={closeModal}
-                      product={product}
+                      product={selectedProduct}
                     />
                   </div>
                   <button
@@ -132,8 +135,8 @@ function ProdcutsCard({
               </div>
 
               <div className="px-4 pb-4 pt-0 mt-2 transition-opacity duration-300">
-                <p className="text-slate-800 text-lg font-semibold">
-                  Price: {product.price} EGP
+                <p className="text-slate-800 text-xl ml-2 font-semibold">
+                  {product.price} EGP
                 </p>
               </div>
             </div>

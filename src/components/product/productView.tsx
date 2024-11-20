@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Clothes } from "../../data/clothes";
+import { addToCart } from "../../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 export default function ProductView({
   isOpen,
@@ -8,7 +10,7 @@ export default function ProductView({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  product: Clothes;
+  product: Clothes | null;
 }) {
   // If the modal is not open, do not render anything
   const [selectedSize, setSelectedSize] = useState("S");
@@ -23,6 +25,16 @@ export default function ProductView({
   const [quantity, setQuantity] = useState(1);
   const increment = () => setQuantity(quantity + 1);
   const decrement = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product: Clothes) => {
+    dispatch(addToCart({ product, qty: quantity }));
+    setQuantity(1);
+    onClose();
+  };
+
+  // console.log(product);
+
   if (!isOpen) return null;
 
   return (
@@ -38,7 +50,7 @@ export default function ProductView({
           <button
             onClick={onClose}
             type="button"
-            className="absolute top-4 right-4 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 flex justify-center items-center hover:text-gray-600"
+            className="absolute top-4 right-4 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 flex justify-center items-center hover:text-gray-600 z-20"
             aria-label="Close modal"
           >
             <svg
@@ -59,12 +71,12 @@ export default function ProductView({
             <span className="sr-only">Close modal</span>
           </button>
           {/* Image section */}
-          <div className="col-span-12 md:col-span-6 lg:col-span-6">
+          <div className="col-span-12 md:col-span-6 lg:col-span-6 mt-4">
             <div className="overflow-hidden">
               <img
-                src={product.image}
-                alt={product.name}
-                className="bg-cover bg-no-repeat bg-center-bottom sm:bg-top md:bg-center lg:bg-top"
+                src={product?.image}
+                alt={product?.name}
+                className="bg-cover bg-no-repeat bg-center-bottom sm:bg-top md:bg-center lg:bg-top "
                 style={{
                   backgroundSize: "cover", // Adjusts the size of the image to cover the section
                   backgroundPosition: "top center", // Centers the image
@@ -80,13 +92,13 @@ export default function ProductView({
 
             {/* Product Details */}
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-5">
-              {product.name}
+              {product?.name}
             </h1>
             <p className="text-gray-500 text-lg md:text-xl lg:text-2xl mb-5">
-              {product.description}
+              {product?.description}
             </p>
             <p className="text-black text-lg md:text-xl lg:text-2xl mb-5">
-              {product.price} EGP
+              {product?.price} EGP
             </p>
 
             {/* Size Selector */}
@@ -152,9 +164,14 @@ export default function ProductView({
               </div>
 
               {/* Add to Cart Button */}
-              <button className="w-full md:w-auto px-6 py-2 h-12 text-white bg-black rounded hover:bg-gray-800 focus:outline-none">
-                Add To Cart
-              </button>
+              {product && (
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="w-full md:w-auto px-6 py-2 h-12 text-white bg-black rounded hover:bg-cyan-500 focus:outline-none"
+                >
+                  Add To Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
