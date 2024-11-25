@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Clothes } from "../../data/clothes";
 import { addToCart } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
+import Snackbar from "../alerts/snackbar";
 
 export default function ProductView({
   isOpen,
@@ -25,12 +26,18 @@ export default function ProductView({
   const [quantity, setQuantity] = useState(1);
   const increment = () => setQuantity(quantity + 1);
   const decrement = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddToCart = (product: Clothes) => {
     dispatch(addToCart({ product, qty: quantity }));
+    setSnackbarVisible(true);
     setQuantity(1);
-    onClose();
+  };
+
+  const handleClose = () => {
+    console.log("Toast close clicked!");
+    setSnackbarVisible(false);
   };
 
   // console.log(product);
@@ -42,6 +49,13 @@ export default function ProductView({
       className="fixed inset-0 z-40 bg-black bg-opacity-25 flex items-center justify-center px-8 lg:p-0 overflow-y-auto"
       aria-hidden={!isOpen} // Update aria-hidden based on isOpen
     >
+      {snackbarVisible === true && (
+        <Snackbar
+          type="success"
+          message="Product added to cart!"
+          onClose={handleClose}
+        />
+      )}
       <div className="relative  w-full lg:max-w-4xl lg:max-h-full bg-white rounded-lg shadow">
         {/* Header with Close Button */}
 
@@ -71,16 +85,15 @@ export default function ProductView({
             <span className="sr-only">Close modal</span>
           </button>
           {/* Image section */}
-          <div className="col-span-12 md:col-span-6 lg:col-span-6 mt-4">
-            <div className="overflow-hidden">
+          <div className="col-span-12 md:col-span-6 lg:col-span-6">
+            <div className="overflow-hidden h-full">
               <img
                 src={product?.image}
                 alt={product?.name}
-                className="bg-cover bg-no-repeat bg-center-bottom sm:bg-top md:bg-center lg:bg-top "
+                className="w-full h-full object-cover"
                 style={{
-                  backgroundSize: "cover", // Adjusts the size of the image to cover the section
-                  backgroundPosition: "top center", // Centers the image
-                  backgroundRepeat: "no-repeat", // Prevents the image from repeating
+                  objectFit: "cover", // Ensures the image covers the entire container
+                  objectPosition: "top center", // Adjusts how the image is positioned within the container
                 }}
               />
             </div>

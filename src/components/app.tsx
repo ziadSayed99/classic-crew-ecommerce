@@ -12,11 +12,11 @@ function AppPart() {
                 <h1 className="text-4xl font-bold mb-4">
                   The Classic Crew App
                 </h1>
-                <p className="text-5xl mb-10">
+                <p className="text-5xl mb-10 md:mt-20">
                   Share Your <span className="font-bold">Ideas</span> & Shop
                   Endless <span className="font-bold">Inspiration</span>
                 </p>
-                <div className="flex flex-col items-left gap-4 md:flex-row md:justify-start">
+                <div className="flex flex-col items-left gap-4 md:flex-row md:justify-start mt-10 md:mt-56">
                   <a
                     href=""
                     target="_blank"

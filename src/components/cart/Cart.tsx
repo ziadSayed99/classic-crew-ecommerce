@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../../data/product";
 import { addQty, decreaseQty, removeItem } from "../../store/cartSlice";
+import Snackbar from "../alerts/snackbar";
 
 type Cart = {
   cart: {
@@ -22,6 +23,7 @@ export default function Cart() {
   const cart = useSelector((state: Cart) => state.cart);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   const handleIncreaseQty = (id: number) => {
     dispatch(addQty(id));
@@ -32,19 +34,36 @@ export default function Cart() {
 
   const handleRemoveItem = (id: number) => {
     dispatch(removeItem(id));
+    setSnackbarVisible(true);
   };
+  const handleClose = () => {
+    console.log("Toast close clicked!");
+    setSnackbarVisible(false);
+  };
+
+  console.log(cart);
 
   return (
     <div>
-      {/* Cart Icon Button */}
+      {snackbarVisible && (
+        <Snackbar
+          type="info"
+          message="Item removed from cart"
+          onClose={handleClose}
+        />
+      )}
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="relative inline-flex items-center p-2 text-gray-700 hover:text-cyan-400 "
+        className="relative inline-flex items-center p-2 text-gray-700 hover:text-cyan-400"
       >
         <span className="sr-only">Open cart</span>
         <ShoppingCartIcon className="h-8 w-8 text-gray-700 hover:text-cyan-400" />{" "}
         {/* Bigger Cart Icon */}
+        {/* Badge for cart quantity */}
+        <span className="absolute top-0 right-0 -mt-1 -mr-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">
+          {cart?.totalQty}
+        </span>
       </button>
 
       {/* Cart Dialog */}

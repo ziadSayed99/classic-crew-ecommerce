@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { addToCart } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
 import ProductView from "./productView";
+import Snackbar from "../alerts/snackbar";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid"; // New icons for cart and qty control
 function ProdcutsCard({
   prodcuts,
   isHomePage,
@@ -14,6 +16,7 @@ function ProdcutsCard({
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Clothes | null>(null);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   const openModal = (product: Clothes) => {
     setSelectedProduct(product); // Set the selected product
@@ -32,13 +35,26 @@ function ProdcutsCard({
 
     if (selectedProduct) {
       dispatch(addToCart({ product: selectedProduct, qty: 1 }));
+      setSnackbarVisible(true);
     } else {
       console.error("Selected product not found");
     }
   };
 
+  const handleClose = () => {
+    console.log("Toast close clicked!");
+    setSnackbarVisible(false);
+  };
+
   return (
     <React.Fragment>
+      {snackbarVisible === true && (
+        <Snackbar
+          type="success"
+          message="Product added to cart!"
+          onClose={handleClose}
+        />
+      )}
       {isHomePage ? (
         <>
           <div>
@@ -46,7 +62,7 @@ function ProdcutsCard({
               Featured Products
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:mx-40 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:mx-40 px-4">
             {prodcuts.map((prodcut) => (
               <div
                 key={prodcut.id}
@@ -109,29 +125,35 @@ function ProdcutsCard({
                 />
               </div>
 
-              <div className="p-4">
+              <div className="p-2">
                 <h6 className="mb-2 text-slate-800 text-xl font-semibold flex justify-between items-center">
-                  {product.name}
-                  <div>
-                    <button
-                      onClick={() => openModal(product)}
-                      className="rounded-md bg-gray-700 py-2 px-4 text-sm text-white transition-shadow shadow-md hover:shadow-lg hover:bg-cyan-500"
-                    >
-                      View
-                    </button>
-                    <ProductView
-                      isOpen={isModalOpen}
-                      onClose={closeModal}
-                      product={selectedProduct}
-                    />
-                  </div>
+                  {/* Product Name */}
+                  <span>{product.name}</span>
+
+                  {/* View Button */}
                   <button
-                    onClick={() => handleAddToCart(product.id)}
+                    onClick={() => openModal(product)}
                     className="rounded-md bg-gray-700 py-2 px-4 text-sm text-white transition-shadow shadow-md hover:shadow-lg hover:bg-cyan-500"
                   >
-                    Add to Cart
+                    View
+                  </button>
+
+                  {/* Add to Cart Icon Button */}
+                  <button
+                    onClick={() => handleAddToCart(product.id)}
+                    className="relative flex items-center justify-center rounded-full bg-gray-700 p-3 text-white transition-shadow shadow-md hover:shadow-lg hover:bg-cyan-500"
+                    aria-label="Add to Cart"
+                  >
+                    <ShoppingCartIcon className="h-5 w-5 text-white-700" />
                   </button>
                 </h6>
+
+                {/* Product View Modal */}
+                <ProductView
+                  isOpen={isModalOpen}
+                  onClose={closeModal}
+                  product={selectedProduct}
+                />
               </div>
 
               <div className="px-4 pb-4 pt-0 mt-2 transition-opacity duration-300">

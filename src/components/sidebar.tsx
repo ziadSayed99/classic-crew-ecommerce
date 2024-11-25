@@ -30,8 +30,8 @@ const sortOptions = [
   { name: "Price: High to Low", href: "#", current: false },
 ];
 const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
+  { name: "Shirt", href: "#" },
+  { name: "Pants", href: "#" },
   { name: "Travel Bags", href: "#" },
   { name: "Hip Bags", href: "#" },
   { name: "Laptop Sleeves", href: "#" },
@@ -163,7 +163,7 @@ function SideBar({ products }: { products: Clothes[] }) {
           </div>
         </Dialog>
 
-        <main className="lg:ml-36 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main className="lg:ml-40 max-w-7xl px-4 sm:px-6 justify-center">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               New Arrivals
@@ -230,7 +230,7 @@ function SideBar({ products }: { products: Clothes[] }) {
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-12">
               {/* Filters */}
-              <div className="lg:col-span-3">
+              <div className="lg:col-span-2">
                 <form className="hidden lg:block">
                   <h3 className="sr-only">Categories</h3>
                   <ul
@@ -298,7 +298,7 @@ function SideBar({ products }: { products: Clothes[] }) {
               </div>
 
               {/* Product grid */}
-              <div className="lg:col-span-9">
+              <div className="lg:col-span-10">
                 <ProdcutsCard isHomePage={false} prodcuts={products} />
               </div>
             </div>
