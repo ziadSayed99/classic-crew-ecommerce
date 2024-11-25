@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../../data/product";
 import { addQty, decreaseQty, removeItem } from "../../store/cartSlice";
 import Snackbar from "../alerts/snackbar";
+import { Link } from "react-router-dom";
 
 type Cart = {
   cart: {
@@ -172,9 +173,12 @@ export default function Cart() {
                       Shipping and taxes calculated at checkout.
                     </p>
                     <div className="mt-6">
-                      <button className="flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-500">
+                      <Link
+                        to={"/checkout"}
+                        className="flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-500"
+                      >
                         Checkout
-                      </button>
+                      </Link>
                     </div>
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>

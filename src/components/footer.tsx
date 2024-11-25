@@ -1,4 +1,29 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function Footer() {
+  const [active, setActive] = useState("");
+  const navigate = useNavigate();
+  const handleNavigation = (section: string) => {
+    setActive(section); // Set the active section to change the style
+    switch (section) {
+      case "Home":
+        navigate("/");
+        break;
+      case "Men":
+        navigate("/products?name=Men");
+        break;
+      case "Kids":
+        navigate("/products?name=Kids");
+        break;
+      case "Search":
+        navigate("/search");
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <footer className="w-full mx-auto">
       <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 bg-[#FBFBFB]">
@@ -13,25 +38,31 @@ export default function Footer() {
             <p className="py-8 text-md text-gray-500 lg:max-w-xs text-center lg:text-left">
               Let us know if you Have any query ?
             </p>
-            <a
-              href="#"
+            <Link
+              to={"/contact"}
               className="py-2.5 px-5 h-11 block w-fit bg-gray-700 rounded-full shadow-sm text-md text-white mx-auto transition-all  duration-500 hover:bg-cyan-500 hover:border-white  lg:mx-0"
             >
               Contact us
-            </a>
+            </Link>
           </div>
           <div className="lg:mx-auto text-left ">
             <h4 className="text-lg text-gray-900 font-medium mb-7">Shop By</h4>
             <ul className="text-md  transition-all duration-500">
               <li className="mb-6">
-                <a href="#" className="text-gray-600 hover:text-cyan-500">
+                <button
+                  onClick={() => handleNavigation("Men")}
+                  className="text-gray-600 hover:text-cyan-500"
+                >
                   Male Clothing
-                </a>
+                </button>
               </li>
               <li className="mb-6">
-                <a href="#" className=" text-gray-600 hover:text-cyan-500">
+                <button
+                  onClick={() => handleNavigation("Kids")}
+                  className=" text-gray-600 hover:text-cyan-500"
+                >
                   Kids Clothing
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -39,9 +70,12 @@ export default function Footer() {
             <h4 className="text-lg text-gray-900 font-medium mb-7">About</h4>
             <ul className="text-md  transition-all duration-500">
               <li className="mb-6">
-                <a href="#" className="text-gray-600 hover:text-cyan-500">
+                <Link
+                  to={"/contact"}
+                  className="text-gray-600 hover:text-cyan-500"
+                >
                   Support Center
-                </a>
+                </Link>
               </li>
               <li className="mb-6">
                 <a href="#" className=" text-gray-600 hover:text-cyan-500">
@@ -61,9 +95,9 @@ export default function Footer() {
             </h4>
             <ul className="text-md  transition-all duration-500">
               <li className="mb-6">
-                <a href="#" className="text-gray-600 hover:text-cyan-500">
+                <Link to={"/FAQ"} className="text-gray-600 hover:text-cyan-500">
                   FAQs
-                </a>
+                </Link>
               </li>
               <li className="mb-6">
                 <a href="#" className=" text-gray-600 hover:text-cyan-500">
