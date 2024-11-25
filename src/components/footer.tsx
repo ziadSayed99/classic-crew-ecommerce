@@ -24,6 +24,8 @@ export default function Footer() {
     }
   };
 
+  console.log(active);
+
   return (
     <footer className="w-full mx-auto">
       <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 bg-[#FBFBFB]">
