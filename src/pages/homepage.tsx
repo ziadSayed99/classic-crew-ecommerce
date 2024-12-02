@@ -2,43 +2,29 @@ import Body from "../components/body";
 import HeroSection from "../components/herosection";
 import Navbar from "../components/Navbar";
 import { Helmet } from "react-helmet";
-import { getClothes } from "../Apis/clothes";
-import { useState, useEffect } from "react";
-import { Clothes } from "../data/clothes";
-import SquareLoadingSkeleton from "../components/SquareLoadingSkeleton";
+
 import ProdcutsCard from "../components/product/prodcuts-card";
 import AppPart from "../components/app";
 import Footer from "../components/footer";
+import { products } from "../data/productItems";
 
 function HomePage() {
-  const [prodcuts, setProducts] = useState<Clothes[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const products = await getClothes();
+  //       setProducts(products);
+  //     } catch (err) {
+  //       console.error(err);
+  //       setError("Failed to load products.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const products = await getClothes();
-        setProducts(products);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load products.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  if (loading) {
-    return <SquareLoadingSkeleton count={5} size={50} />;
-  }
-
-  if (error) {
-    return <div className="text-red-500 text-center mt-10">{error}</div>;
-  }
+  //   fetchProducts();
+  // }, []);
 
   return (
     <div className="bg-white dark:bg-custom-black">
@@ -60,7 +46,7 @@ function HomePage() {
           <Body />
         </section>
         <section className="mt-24">
-          <ProdcutsCard isHomePage={true} prodcuts={prodcuts} />
+          <ProdcutsCard isHomePage={true} prodcuts={products} />
         </section>
         <section className="mt-24">
           <AppPart />

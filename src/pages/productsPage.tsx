@@ -5,10 +5,11 @@ import { getClothesByCategory } from "../Apis/clothes";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import { useLocation } from "react-router-dom";
+import { products } from "../data/productItems";
 
 function ProductsPage() {
   const location = useLocation();
-  const [prodcuts, setProducts] = useState<Clothes[]>([]);
+  const [newProducts, setNewProducts] = useState<Clothes[]>([]);
   const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
@@ -19,9 +20,10 @@ function ProductsPage() {
       setCategoryName(newCategoryName);
 
       // Fetch the products for the new category
-      getClothesByCategory(newCategoryName.toLowerCase()).then((res) =>
-        setProducts(res)
+      const filteredProducts = products.filter(
+        (item) => item.category.toLowerCase() === newCategoryName.toLowerCase()
       );
+      setNewProducts(filteredProducts);
     }
   }, [location.search]);
 
@@ -31,7 +33,7 @@ function ProductsPage() {
         <Navbar />
       </header>
       <main>
-        <SideBar products={prodcuts} />
+        <SideBar products={newProducts} />
       </main>
       <footer>
         <Footer />
