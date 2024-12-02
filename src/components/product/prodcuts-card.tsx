@@ -46,6 +46,8 @@ function ProdcutsCard({
     setSnackbarVisible(false);
   };
 
+  console.log(prodcuts);
+
   return (
     <React.Fragment>
       {snackbarVisible === true && (
@@ -63,7 +65,7 @@ function ProdcutsCard({
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:mx-40 px-4">
-            {prodcuts.map((prodcut) => (
+            {prodcuts?.map((prodcut) => (
               <div
                 key={prodcut.id}
                 className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg transition-transform duration-300 overflow-hidden group w-full"
