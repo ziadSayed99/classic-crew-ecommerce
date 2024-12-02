@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SideBar from "../components/sidebar";
 import { Clothes } from "../data/clothes";
-import { getClothesByCategory } from "../Apis/clothes";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import { useLocation } from "react-router-dom";
