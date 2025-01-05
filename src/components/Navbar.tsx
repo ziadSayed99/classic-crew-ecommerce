@@ -122,7 +122,7 @@ function Navbar() {
           <div className="flex items-center justify-between">
             <a
               href="/"
-              className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3"
+              className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3 justify-center"
             >
               Classic Crew
             </a>

@@ -7,6 +7,7 @@ import ProdcutsCard from "../components/product/prodcuts-card";
 import AppPart from "../components/app";
 import Footer from "../components/footer";
 import { products } from "../data/productItems";
+import MobileBottomNav from "../components/mobile-bottomNav";
 
 function HomePage() {
   // useEffect(() => {
@@ -31,12 +32,14 @@ function HomePage() {
       <Helmet>
         <meta charSet="utf-8" />
         <title>E-commerce</title>
+        <meta name="description" content="E-commerce" />
         <link rel="canonical" href="#" />
       </Helmet>
       <header>
         <nav className="mb-24">
           <Navbar />
         </nav>
+        <MobileBottomNav />
       </header>
       <main>
         <section>
@@ -51,6 +54,7 @@ function HomePage() {
         <section className="mt-24">
           <AppPart />
         </section>
+        <section></section>
       </main>
       <footer>
         <Footer />
