@@ -27,9 +27,12 @@ function Body() {
   return (
     <div>
       <div className="bg-white">
-        <h2 className="text-xl lg:text-4xl font-bold text-black text-center mb-10 lg:mb-10 mt-5">
-          Bold & Trendy: Fashion for Every <br /> Generation
+        <h2 className="text-xl lg:text-4xl  font-playfair text-black text-center mt-5">
+          Shop by Category.
         </h2>
+        <p className="text-center text-gray-500 mb-10">
+          Discover our carefully curated collections
+        </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 pr-10 pl-10">
           {callouts.map((callout) => (
             <Link

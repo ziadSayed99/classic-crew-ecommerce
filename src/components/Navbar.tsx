@@ -6,10 +6,25 @@ import AccountImg from "./AccountImg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveCart } from "../store/cartSlice";
+import { FaSearch } from "react-icons/fa";
 
 function Navbar() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     dispatch(saveCart());
     window.scrollTo(0, 0);
@@ -53,61 +68,71 @@ function Navbar() {
 
   return (
     <header className="bg-white">
-      <nav className="fixed top-0 z-10 flex w-full bg-[#FBFBFB] py-6 justify-between">
-        <div className="flex align-start ml-4 mr-5 lg:ml-40 lg:mr-0 ">
-          <a
-            href="/"
-            className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3 lg:mt-0"
-          >
-            Classic Crew
-          </a>
-        </div>
-
-        {/* Popover Group - Desktop Menu Items */}
-        <div className="hidden lg:flex lg:gap-x-8 h-10">
-          {["Home", "Men", "Kids", "Search"].map((section) => (
-            <button
-              key={section}
-              className={`flex items-center gap-x-1 text-md font-semibold leading-6 cursor-pointer ${
-                active === section
-                  ? "text-cyan-500"
-                  : "text-black hover:text-cyan-500"
-              }`}
-              onClick={() => handleNavigation(section)}
+      <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled ? 'bg-[#FBFBFB]/50 backdrop-blur-sm' : 'bg-[#FBFBFB]'
+      } py-4 px-4 lg:px-8`}>
+        <div className="mx-auto max-w-7xl flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <a
+              href="/"
+              className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat"
             >
-              {section}
-            </button>
-          ))}
-        </div>
-
-        {/* Account and Cart section */}
-        <div className="flex items-center lg:mr-32">
-          <AccountImg />
-          <div className="ml-4 hover:cursor-pointer">
-            <Cart />
+              Classic Crew
+            </a>
           </div>
-        </div>
 
-        {/* Mobile Menu Button */}
-        <div className="lg:hidden">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-black ml-10 mr-5 mt-3"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {/* Desktop Menu Items */}
+          <div className="hidden lg:flex items-center justify-center flex-1 px-8">
+            {["Home", "Men", "Kids", "Search"].map((section) => (
+              <button
+                key={section}
+                className={`px-4 py-2 text-md font-semibold leading-6 cursor-pointer ${
+                  active === section
+                    ? "text-cyan-500"
+                    : "text-black hover:text-cyan-500"
+                }`}
+                onClick={() => handleNavigation(section)}
+              >
+                {section}
+              </button>
+            ))}
+          </div>
+
+          {/* Account and Cart section */}
+          <div className="flex items-center space-x-4">
+            <div className="hidden md:block">
+              <AccountImg />
+            </div>
+            <div className="hover:cursor-pointer">
+              <Cart />
+            </div>
+            <div className="hidden md:block hover:cursor-pointer">
+              <FaSearch className="text-lg" />
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-black p-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -118,11 +143,11 @@ function Navbar() {
         className="lg:hidden z-30"
       >
         <div className="fixed inset-0 z-10" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-custom-black max-h-56">
+        <DialogPanel className="fixed inset-y-0 right-0 z-40 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a
               href="/"
-              className="text-[16px] lg:text-[30px] font-extrabold uppercase tracking-[1px] text-black font-montserrat mt-3 justify-center"
+              className="text-[16px] font-extrabold uppercase tracking-[1px] text-black font-montserrat"
             >
               Classic Crew
             </a>
@@ -132,17 +157,17 @@ function Navbar() {
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
             >
               <span className="sr-only">Close menu</span>
-              <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           <div className="mt-6">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {["Home", "Men", "Kids", "Search"].map((section) => (
+                {["Home", "Men", "Kids", "Search", "Account"].map((section) => (
                   <button
                     key={section}
-                    className={`flex items-center gap-x-1 text-sm font-semibold leading-6 cursor-pointer text-black hover:text-cyan-500 ${
-                      active === section ? "text-cyan-500" : "text-gray-700"
+                    className={`w-full text-left px-3 py-2 text-sm font-semibold leading-6 cursor-pointer ${
+                      active === section ? "text-cyan-500" : "text-gray-700 hover:text-cyan-500"
                     }`}
                     onClick={() => handleNavigation(section)}
                   >
