@@ -84,7 +84,7 @@ function Navbar() {
 
           {/* Desktop Menu Items */}
           <div className="hidden lg:flex items-center justify-center flex-1 px-8">
-            {["Home", "Men", "Kids", "Search"].map((section) => (
+            {["New Arrivals", "Men", "Kids"].map((section) => (
               <button
                 key={section}
                 className={`px-4 py-2 text-md font-semibold leading-6 cursor-pointer ${
@@ -163,7 +163,7 @@ function Navbar() {
           <div className="mt-6">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {["Home", "Men", "Kids", "Search", "Account"].map((section) => (
+                {["New Arrivals", "Men", "Kids", "Account"].map((section) => (
                   <button
                     key={section}
                     className={`w-full text-left px-3 py-2 text-sm font-semibold leading-6 cursor-pointer ${

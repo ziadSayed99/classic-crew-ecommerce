@@ -33,7 +33,7 @@ function Body() {
         <p className="text-center text-gray-500 mb-10">
           Discover our carefully curated collections
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 pr-10 pl-10">
+        <div className="grid sm:grid-cols-2 gap-4 lg:px-36">
           {callouts.map((callout) => (
             <Link
               to={`/products?name=${callout.name}`}
@@ -45,16 +45,15 @@ function Body() {
                   <img
                     src={callout.imageSrc}
                     alt={callout.imageAlt}
-                    className="hover:opacity-75 transition-transform transform hover:scale-125 rounded-md w-full "
+                    className="hover:opacity-75"
                     style={{
                       height: "550px", // Set a fixed height for all images (you can adjust this value)
-                      objectFit: "cover", // Ensures the image covers the container while maintaining aspect ratio
-                      backgroundPosition: "top center", // Centers the image
-                      backgroundRepeat: "no-repeat", // Prevents the image from repeating
                     }}
                   />
                   {/* Black overlay with opacity */}
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity "></div>
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity ">
+                    
+                  </div>
 
                   {/* Text appearing on hover */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity ">
