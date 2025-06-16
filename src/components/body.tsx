@@ -45,18 +45,18 @@ function Body() {
                   <img
                     src={callout.imageSrc}
                     alt={callout.imageAlt}
-                    className="hover:opacity-75"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                     style={{
-                      height: "550px", // Set a fixed height for all images (you can adjust this value)
+                      height: "550px",
                     }}
                   />
                   {/* Black overlay with opacity */}
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity ">
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-500 ease-in-out">
                     
                   </div>
 
                   {/* Text appearing on hover */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity ">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
                     <p className="text-white text-2xl font-semibold">
                       {callout.name}
                     </p>
@@ -74,50 +74,61 @@ function Body() {
           ))}
         </div>
       </div>
-      <div className="flex flex-row justify-center bg-gray-300">
-        <div className="flex flex-row lg:gap-x-96 mt-10 mb-10">
-          <div>
-            <img
-              className="h-14 w-14 lg:w-20 lg:h-20"
-              src={cash}
-              alt="cash"
-            ></img>
-            <p className="text-sm mr-2">Cash On Delivery</p>
+      <div className="flex flex-row justify-center bg-gray-100 py-16">
+        <div className="flex flex-row lg:gap-x-96 gap-x-12 flex-wrap justify-center">
+          <div className="flex flex-col items-center group hover:scale-105 transition-transform duration-300">
+            <div className="bg-white p-4 rounded-full shadow-lg mb-4 group-hover:shadow-xl transition-shadow">
+              <img
+                className="h-14 w-14 lg:w-20 lg:h-20"
+                src={cash}
+                alt="cash"
+              />
+            </div>
+            <p className="text-gray-700 font-medium text-lg">Cash On Delivery</p>
+            <p className="text-gray-500 text-sm mt-1">Pay when you receive</p>
           </div>
-          <div>
-            <img
-              className="h-14 w-14 lg:w-20 lg:h-20"
-              src={delivery}
-              alt="cash"
-            ></img>
-            <p className="text-sm">Fast Devliery</p>
+          <div className="flex flex-col items-center group hover:scale-105 transition-transform duration-300">
+            <div className="bg-white p-4 rounded-full shadow-lg mb-4 group-hover:shadow-xl transition-shadow">
+              <img
+                className="h-14 w-14 lg:w-20 lg:h-20"
+                src={delivery}
+                alt="delivery"
+              />
+            </div>
+            <p className="text-gray-700 font-medium text-lg">Fast Delivery</p>
+            <p className="text-gray-500 text-sm mt-1">Quick & reliable shipping</p>
           </div>
-          <div>
-            <img
-              className="h-14 w-14 lg:w-20 lg:h-20 ml-12"
-              src={cs}
-              alt="cash"
-            ></img>
-            <p className="ml-2 text-sm">Customer Services 1698</p>
+          <div className="flex flex-col items-center group hover:scale-105 transition-transform duration-300">
+            <div className="bg-white p-4 rounded-full shadow-lg mb-4 group-hover:shadow-xl transition-shadow">
+              <img
+                className="h-14 w-14 lg:w-20 lg:h-20"
+                src={cs}
+                alt="customer service"
+              />
+            </div>
+            <p className="text-gray-700 font-medium text-lg">Customer Service</p>
+            <p className="text-gray-500 text-sm mt-1">24/7 Support Available</p>
           </div>
         </div>
       </div>
       <section
-        className=" bg-cover bg-no-repeat bg-center-bottom sm:bg-top md:bg-center mr-4 ml-4 lg:mr-10 lg:ml-10 mt-10"
+        className="relative bg-cover bg-no-repeat bg-center mx-4 lg:mx-10 mt-10 rounded-xl overflow-hidden h-[300px] md:h-[400px] lg:h-[500px]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0)),
+            linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
             url(${ads})
           `,
-          backgroundPosition: "top ", // Centers the image
-          paddingBottom: "50px",
+          backgroundPosition: "center",
+          backgroundSize: "cover"
         }}
       >
-        <div className="grid max-w-screen-xl px-4 py-8 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12  sm:grid-cols-12">
-          <div className="lg:col-span-12 md:col-span-6">
-            <blockquote className="text-4xl italic font-semibold text-gray-900 dark:text-white">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl lg:ml-32 mt-40 mb-32 uppercase">
-                UP TO 50% OFF <br /> for all collections{" "}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <blockquote className="text-4xl italic font-semibold text-white">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase tracking-wide text-center lg:text-left">
+                UP TO 50% OFF <br /> 
+                <span className="text-yellow-400 block mt-2">for all collections</span>
               </h1>
             </blockquote>
           </div>
