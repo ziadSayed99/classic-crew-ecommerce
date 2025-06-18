@@ -13,14 +13,14 @@ function Body() {
       description: "Discover newest men collection",
       imageSrc: men,
       imageAlt: "",
-      href: "/men",
+      href: "/products?name=Men",
     },
     {
       name: "Kids",
       description: "Fashion with style",
       imageSrc: kids,
       imageAlt: "",
-      href: "/men",
+      href: "/products?name=Kids",
     },
   ];
 
@@ -33,10 +33,10 @@ function Body() {
         <p className="text-center text-gray-500 mb-10">
           Discover our carefully curated collections
         </p>
-        <div className="grid sm:grid-cols-2 gap-4 lg:px-36">
+        <div className="grid sm:grid-cols-2 gap-4 mx-2 md:mx-0 lg:px-36">
           {callouts.map((callout) => (
             <Link
-              to={`/products?name=${callout.name}`}
+              to={callout.href}
               key={callout.name}
               className="group relative"
             >
