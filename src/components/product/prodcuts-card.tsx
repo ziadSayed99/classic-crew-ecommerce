@@ -70,7 +70,7 @@ function ProdcutsCard({
             </h2>
             <p className="text-center text-gray-500 mb-4">Discover our most popular styles this season</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:mx-20 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:mx-20 px-4">
             {filteredProducts?.map((product) => (
               <div
                 key={product.id}

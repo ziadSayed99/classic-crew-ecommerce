@@ -80,15 +80,6 @@ function Navbar() {
     }
   };
 
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-    if (!isSearchOpen) {
-      setTimeout(() => {
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) searchInput.focus();
-      }, 100);
-    }
-  };
 
   // Predictive search logic
   useEffect(() => {
@@ -228,7 +219,7 @@ function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for products..."
-                  className="w-full pl-10 pr-2 sm:pr-4 py-2 bg-transparent border-none focus:outline-none focus:ring-0 text-base sm:text-base text-sm placeholder-gray-500"
+                  className="w-full pl-10 pr-2 sm:pr-4 py-2 bg-transparent border-none focus:outline-none focus:ring-0 text-sm sm:text-base placeholder-gray-500"
                   onFocus={() => searchQuery && setShowSuggestions(true)}
                   autoComplete="off"
                 />
