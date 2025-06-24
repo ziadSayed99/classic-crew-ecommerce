@@ -80,14 +80,14 @@ const slides = [
     title: "Men's Collection",
     subtitle: "Elevate your style with our premium menswear",
     cta: "Shop Men",
-    link: "/category/men",
+    link: "/products?name=Men",
   },
   {
     image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=1887&auto=format&fit=crop",
     title: "Kids' Essentials",
     subtitle: "Colorful and comfortable styles for the little ones",
     cta: "Explore Kids",
-    link: "/category/kids",
+    link: "/products?name=Kids",
   },
 ];
 
