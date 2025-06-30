@@ -32,6 +32,11 @@ function CheckOutPage() {
     navigate("/");
   };
 
+  // Calculate subtotal and total based on product quantities
+  const shipping = 25;
+  const subtotal = cart?.items.reduce((sum, product) => sum + (product.price * (product.qty || 1)), 0);
+  const total = subtotal + shipping;
+
   return (
     <>
       <OrderPlacedModal open={openModal} close={handleCloseModal} />
@@ -307,18 +312,18 @@ function CheckOutPage() {
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Subtotal</p>
                   <p className="font-semibold text-gray-900">
-                    {cart?.totalPrice}EGP
+                    {subtotal.toFixed(2)} EGP
                   </p>
                 </div>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Shipping</p>
-                  <p className="font-semibold text-gray-900">25.00 EGP</p>
+                  <p className="font-semibold text-gray-900">{shipping.toFixed(2)} EGP</p>
                 </div>
               </div>
               <div className="mt-6 flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Total</p>
                 <p className="text-2xl font-semibold text-gray-900">
-                  {cart?.totalPrice + 25}EGP
+                  {total.toFixed(2)} EGP
                 </p>
               </div>
             </div>
