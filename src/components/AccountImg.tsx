@@ -55,7 +55,7 @@ function AccountImg() {
                 <div className="py-4">
                   <ul className="space-y-2">
                     <li>
-                      <Link to="/orders" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
+                      <Link to="/account/orders" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
                         <span className="text-gray-700">My Orders</span>
                       </Link>
                     </li>

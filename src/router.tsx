@@ -5,6 +5,7 @@ import ContactUsPage from "./pages/contactPage";
 import Faq from "./pages/FaqPage";
 import CheckOutPage from "./pages/checkOut";
 import SearchPage from "./pages/searchPage";
+import OrderPage from "./pages/account/order-page";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <CheckOutPage />,
+  },
+  {
+    path: "/account/orders",
+    element: <OrderPage />,
   },
 ]);
 
