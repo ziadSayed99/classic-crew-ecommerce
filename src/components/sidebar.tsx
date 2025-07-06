@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -23,40 +23,27 @@ import ProdcutsCard from "./product/prodcuts-card";
 import { Clothes } from "../data/clothes";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Most Popular", value: "popular", current: true },
+  { name: "Newest", value: "newest", current: false },
+  { name: "Price: Low to High", value: "price-asc", current: false },
+  { name: "Price: High to Low", value: "price-desc", current: false },
 ];
 const subCategories = [
-  { name: "Shirt", href: "#" },
-  { name: "Pants", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
+  { name: "T-Shirt" },
+  { name: "Shirt" },
+  { name: "Jeans" },
+  { name: "Sweater" },
+  { name: "Shorts" },
+  { name: "Dress" },
+  { name: "Jacket" },
 ];
 const filters = [
   {
-    id: "color",
-    name: "Color",
+    id: "sticker",
+    name: "Sticker",
     options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "Sm", label: "Sm", checked: false },
-      { value: "Md", label: "Md", checked: false },
-      { value: "Lg", label: "Lg", checked: false },
-      { value: "xl", label: "XL", checked: false },
+      { value: "NEW", label: "New", checked: false },
+      { value: "BEST SELLER", label: "Best Seller", checked: false },
     ],
   },
 ];
@@ -67,6 +54,73 @@ function classNames(...classes: string[]): string {
 
 function SideBar({ products }: { products: Clothes[] }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [sortedProducts, setSortedProducts] = useState<Clothes[]>([]);
+  const [currentSort, setCurrentSort] = useState("popular");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedStickers, setSelectedStickers] = useState<string[]>([]);
+
+  useEffect(() => {
+    let filteredProducts =
+      selectedCategories.length > 0
+        ? products.filter((product) =>
+            selectedCategories.some((category) =>
+              product.name.toLowerCase().includes(category.toLowerCase())
+            )
+          )
+        : products;
+
+    if (selectedStickers.length > 0) {
+      filteredProducts = filteredProducts.filter((product) =>
+        selectedStickers.includes(product.sticker)
+      );
+    }
+
+    let newSortedProducts = [...filteredProducts];
+    switch (currentSort) {
+      case "price-asc":
+        newSortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        newSortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+        newSortedProducts.sort((a, b) => b.id - a.id);
+        break;
+      case "popular":
+        newSortedProducts.sort((a, b) => {
+          if (a.sticker === "BEST SELLER" && b.sticker !== "BEST SELLER")
+            return -1;
+          if (a.sticker !== "BEST SELLER" && b.sticker === "BEST SELLER")
+            return 1;
+          return 0;
+        });
+        break;
+      default:
+        break;
+    }
+    setSortedProducts(newSortedProducts);
+  }, [currentSort, products, selectedCategories, selectedStickers]);
+
+  const handleSortChange = (sortValue: string) => {
+    setCurrentSort(sortValue);
+  };
+
+  const handleCategoryToggle = (categoryName: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(categoryName)
+        ? prev.filter((c) => c !== categoryName)
+        : [...prev, categoryName]
+    );
+  };
+
+  const handleStickerChange = (stickerValue: string, isChecked: boolean) => {
+    setSelectedStickers((prev) =>
+      isChecked
+        ? [...prev, stickerValue]
+        : prev.filter((s) => s !== stickerValue)
+    );
+  };
+
   return (
     <div className="bg-white">
       <div>
@@ -104,9 +158,16 @@ function SideBar({ products }: { products: Clothes[] }) {
                 <ul role="list" className="px-2 py-3 font-medium text-gray-900">
                   {subCategories.map((category) => (
                     <li key={category.name}>
-                      <a href={category.href} className="block px-2 py-3">
+                      <button
+                        onClick={() => handleCategoryToggle(category.name)}
+                        className={`block px-2 py-3 ${
+                          selectedCategories.includes(category.name)
+                            ? "text-indigo-600"
+                            : ""
+                        }`}
+                      >
                         {category.name}
-                      </a>
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -139,8 +200,10 @@ function SideBar({ products }: { products: Clothes[] }) {
                         {section.options.map((option, optionIdx) => (
                           <div key={option.value} className="flex items-center">
                             <input
-                              defaultValue={option.value}
-                              defaultChecked={option.checked}
+                              onChange={(e) =>
+                                handleStickerChange(option.value, e.target.checked)
+                              }
+                              checked={selectedStickers.includes(option.value)}
                               id={`filter-mobile-${section.id}-${optionIdx}`}
                               name={`${section.id}[]`}
                               type="checkbox"
@@ -188,17 +251,17 @@ function SideBar({ products }: { products: Clothes[] }) {
                   <div className="py-1">
                     {sortOptions.map((option) => (
                       <MenuItem key={option.name}>
-                        <a
-                          href={option.href}
+                        <button
+                          onClick={() => handleSortChange(option.value)}
                           className={classNames(
-                            option.current
+                            currentSort === option.value
                               ? "font-medium text-gray-900"
                               : "text-gray-500",
-                            "block px-4 py-2 text-sm data-[focus]:bg-gray-100"
+                            "block px-4 py-2 text-sm w-full text-left data-[focus]:bg-gray-100"
                           )}
                         >
                           {option.name}
-                        </a>
+                        </button>
                       </MenuItem>
                     ))}
                   </div>
@@ -239,7 +302,16 @@ function SideBar({ products }: { products: Clothes[] }) {
                   >
                     {subCategories.map((category) => (
                       <li key={category.name}>
-                        <a href={category.href}>{category.name}</a>
+                        <button
+                          onClick={() => handleCategoryToggle(category.name)}
+                          className={
+                            selectedCategories.includes(category.name)
+                              ? "text-indigo-600"
+                              : ""
+                          }
+                        >
+                          {category.name}
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -275,8 +347,15 @@ function SideBar({ products }: { products: Clothes[] }) {
                               className="flex items-center"
                             >
                               <input
-                                defaultValue={option.value}
-                                defaultChecked={option.checked}
+                                onChange={(e) =>
+                                  handleStickerChange(
+                                    option.value,
+                                    e.target.checked
+                                  )
+                                }
+                                checked={selectedStickers.includes(
+                                  option.value
+                                )}
                                 id={`filter-${section.id}-${optionIdx}`}
                                 name={`${section.id}[]`}
                                 type="checkbox"
@@ -299,7 +378,7 @@ function SideBar({ products }: { products: Clothes[] }) {
 
               {/* Product grid */}
               <div className="lg:col-span-10">
-                <ProdcutsCard isHomePage={false} prodcuts={products} />
+                <ProdcutsCard isHomePage={false} prodcuts={sortedProducts} />
               </div>
             </div>
           </section>

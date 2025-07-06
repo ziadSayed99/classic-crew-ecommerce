@@ -6,6 +6,7 @@ import ProductView from "./productView";
 import Snackbar from "../alerts/snackbar";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon, EyeIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 function ProdcutsCard({
   prodcuts,
@@ -82,11 +83,13 @@ function ProdcutsCard({
                 </div>
                 {/* Product Image with Hover Overlay */}
                 <div className="relative aspect-square w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  />
+                  <Link to={`/product/${product.id}`}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </Link>
                   {/* Bottom Shadow */}
                   <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-10" />
                   {/* Hover Overlay with Icons at Bottom Center */}
@@ -124,7 +127,7 @@ function ProdcutsCard({
                       4.8 <span className="text-gray-400">(124)</span>
                     </span>
                   </div>
-                  <div className="font-semibold text-sm text-gray-900 mb-1 truncate">{product.name}</div>
+                  <Link to={`/product/${product.id}`} className="font-semibold text-sm text-gray-900 mb-1 truncate">{product.name}</Link>
                   <div className="font-bold text-lg text-gray-800 mb-1">{product.price} <span className="text-gray-500 text-sm">EGP</span></div>
                   {/* Color Dots */}
                   <div className="flex justify-end gap-1">
@@ -155,11 +158,13 @@ function ProdcutsCard({
             </div>
             {/* Product Image with Hover Overlay */}
             <div className="relative aspect-square w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-              />
+              <Link to={`/product/${product.id}`}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                />
+              </Link>
               {/* Bottom Shadow */}
               <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-10" />
               {/* Hover Overlay with Icons at Bottom Center */}
@@ -197,7 +202,7 @@ function ProdcutsCard({
                   4.8 <span className="text-gray-400">(124)</span>
                 </span>
               </div>
-              <div className="font-semibold text-lg text-gray-900 mb-1 truncate">{product.name}</div>
+              <Link to={`/product/${product.id}`} className="font-semibold text-lg text-gray-900 mb-1 truncate">{product.name}</Link>
               <div className="font-bold text-xl text-gray-800 mb-2">{product.price} <span className="text-gray-500 text-base">EGP</span></div>
               {/* Color Dots */}
               <div className="flex justify-end gap-1">
