@@ -34,7 +34,7 @@ function ProdcutsCard({
   };
 
 
-  const filteredProducts = prodcuts.filter((product) => product.sticker==="BEST SELLER");
+  const filteredProducts = prodcuts.filter((product) => product.sticker === "NEW");
 
   const handleAddToCart = (selectedProductId: number) => {
     const selectedProduct = prodcuts.find(
@@ -91,9 +91,9 @@ function ProdcutsCard({
         <>
           <div>
             <h2 className="text-4xl font-bold text-black text-center mb-4 mt-2">
-            Trending Now
+              New Arrivals
             </h2>
-            <p className="text-center text-gray-500 mb-4">Discover our most popular styles this season</p>
+            <p className="text-center text-gray-500 mb-4">Discover our latest styles just in!</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:mx-20 px-4">
             {filteredProducts?.map((product) => (
@@ -103,7 +103,7 @@ function ProdcutsCard({
               >
                 {/* New Badge */}
                 <div className="absolute top-2 left-2 z-10">
-                  <span className="bg-black text-white text-xs font-semibold px-2 py-1 rounded">Best Seller</span>
+                  <span className="bg-cyan-600 text-white text-xs font-semibold px-2 py-1 rounded">New</span>
                 </div>
                 {/* Product Image with Hover Overlay */}
                 <div className="relative aspect-square w-full bg-gray-100 flex items-center justify-center overflow-hidden">
@@ -177,9 +177,11 @@ function ProdcutsCard({
             className="bg-white rounded-2xl shadow-md overflow-hidden relative group transition-all duration-300 border border-slate-100"
           >
             {/* New Badge */}
+            {product.sticker && (
             <div className="absolute top-3 left-3 z-10">
-              <span className="bg-black text-white text-xs font-semibold px-2 py-1 rounded">Best Seller</span>
+              <span className="bg-black text-white text-xs font-semibold px-2 py-1 rounded">{product.sticker}</span>
             </div>
+            )}
             {/* Product Image with Hover Overlay */}
             <div className="relative aspect-square w-full bg-gray-100 flex items-center justify-center overflow-hidden">
               <Link to={`/product/${product.id}`}>

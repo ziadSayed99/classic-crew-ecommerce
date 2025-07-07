@@ -8,6 +8,7 @@ import SearchPage from "./pages/searchPage";
 import OrderPage from "./pages/account/order-page";
 import ProductDetailPage from "./pages/productDetailPage";
 import WishlistPage from "./pages/wishlistPage";
+import EditProfilePage from "./pages/account/edit-profile";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/wishlist",
     element: <WishlistPage />,
+  },
+  {
+    path: "/account/edit-profile",
+    element: <EditProfilePage />,
   },
 ]);
 

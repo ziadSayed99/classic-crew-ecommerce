@@ -29,7 +29,7 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_tshirt.jpeg",
     description:
       "Comfortable and durable t-shirt designed specifically for kids. Made from soft cotton for all-day comfort.",
-    sticker: "NONE"
+    sticker: ""
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ export const products: Clothes[] = [
     image: "/assets/products/men_jeans.jpeg",
     description:
       "Classic fit jeans with a modern touch. Durable denim construction with comfortable stretch for everyday wear.",
-    sticker: "NONE"
+    sticker: ""
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_sweater.jpeg",
     description:
       "Warm and cozy sweater perfect for cooler weather. Soft knit material that's gentle on children's skin.",
-    sticker: "NONE"
+    sticker: ""
   },
   {
     id: 8,
@@ -89,7 +89,7 @@ export const products: Clothes[] = [
     image: "/assets/products/men_shirt_black.jpeg",
     description:
       "Sophisticated black sweater with a sleek design. Versatile piece that transitions from office to evening wear.",
-    sticker: "NONE"
+    sticker: ""
   },
   {
     id: 10,

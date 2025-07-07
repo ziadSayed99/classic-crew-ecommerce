@@ -14,10 +14,16 @@ function ProductsPage() {
   useEffect(() => {
     const params = new URLSearchParams(location.search); // Use location.search
     const newCategoryName = params.get("name");
+    const sticker = params.get("sticker");
 
-    if (newCategoryName && newCategoryName !== categoryName) {
+    if (sticker) {
+      setCategoryName("");
+      const filteredProducts = products.filter(
+        (item) => item.sticker && item.sticker.toUpperCase() === sticker.toUpperCase()
+      );
+      setNewProducts(filteredProducts);
+    } else if (newCategoryName && newCategoryName !== categoryName) {
       setCategoryName(newCategoryName);
-
       // Fetch the products for the new category
       const filteredProducts = products.filter(
         (item) => item.category.toLowerCase() === newCategoryName.toLowerCase()

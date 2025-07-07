@@ -77,13 +77,8 @@ function AccountImg() {
                   <h4 className="text-gray-500 text-xs uppercase mb-2 px-2">Account Settings</h4>
                   <ul className="space-y-2">
                     <li>
-                      <Link to="/profile" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
+                      <Link to="/account/edit-profile" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
                         <span className="text-gray-700">Edit Profile</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/settings" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
-                        <span className="text-gray-700">Settings</span>
                       </Link>
                     </li>
                   </ul>
