@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
-import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, MagnifyingGlassIcon, HeartIcon } from "@heroicons/react/24/outline";
 import Cart from "./cart/Cart";
 import AccountImg from "./AccountImg";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveCart } from "../store/cartSlice";
 import { products } from "../data/productItems";

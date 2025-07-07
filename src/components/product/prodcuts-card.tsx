@@ -1,12 +1,13 @@
 import { Clothes } from "../../data/clothes";
 import React, { useState } from "react";
 import { addToCart } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductView from "./productView";
 import Snackbar from "../alerts/snackbar";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { addToWishlist, removeFromWishlist } from "../../store/wishlistSlice";
 
 function ProdcutsCard({
   prodcuts,
@@ -19,6 +20,8 @@ function ProdcutsCard({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Clothes | null>(null);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const wishlist = useSelector((state: any) => state.wishlist.items);
+  const [wishlistSnackbar, setWishlistSnackbar] = useState<{visible: boolean, message: string}>({visible: false, message: ""});
 
   const openModal = (product: Clothes) => {
     setSelectedProduct(product);
@@ -52,6 +55,18 @@ function ProdcutsCard({
     setSnackbarVisible(false);
   };
 
+  const handleWishlist = (product: Clothes) => {
+    const isInWishlist = wishlist.some((item: Clothes) => item.id === product.id);
+    if (isInWishlist) {
+      dispatch(removeFromWishlist(product.id));
+      setWishlistSnackbar({visible: true, message: "Removed from wishlist!"});
+    } else {
+      dispatch(addToWishlist(product));
+      setWishlistSnackbar({visible: true, message: "Added to wishlist!"});
+    }
+    setTimeout(() => setWishlistSnackbar({visible: false, message: ""}), 2000);
+  };
+
   return (
     <React.Fragment>
       {snackbarVisible && (
@@ -60,6 +75,15 @@ function ProdcutsCard({
             type="success"
             message="Product added to cart!"
             onClose={handleClose}
+          />
+        </div>
+      )}
+      {wishlistSnackbar.visible && (
+        <div className="fixed bottom-20 left-4 z-50">
+          <Snackbar
+            type="success"
+            message={wishlistSnackbar.message}
+            onClose={() => setWishlistSnackbar({visible: false, message: ""})}
           />
         </div>
       )}
@@ -103,11 +127,11 @@ function ProdcutsCard({
                         <ShoppingCartIcon className="h-4 w-4" />
                       </button>
                       <button
-                        onClick={() => { /* wishlist logic */ }}
-                        className="bg-white rounded-full p-1.5 shadow hover:bg-pink-500 hover:text-white transition-colors"
+                        onClick={() => handleWishlist(product)}
+                        className={`bg-white rounded-full p-1.5 shadow transition-colors ${wishlist.some((item: Clothes) => item.id === product.id) ? 'text-pink-500' : 'hover:bg-pink-500 hover:text-white'}`}
                         aria-label="Add to Wishlist"
                       >
-                        <HeartIcon className="h-4 w-4" />
+                        <HeartIcon className="h-4 w-4" fill={wishlist.some((item: Clothes) => item.id === product.id) ? '#ec4899' : 'none'} />
                       </button>
                       <button
                         onClick={() => openModal(product)}
@@ -178,11 +202,11 @@ function ProdcutsCard({
                     <ShoppingCartIcon className="h-5 w-5" />
                   </button>
                   <button
-                    onClick={() => { /* wishlist logic */ }}
-                    className="bg-white rounded-full p-2 shadow hover:bg-pink-500 hover:text-white transition-colors"
+                    onClick={() => handleWishlist(product)}
+                    className={`bg-white rounded-full p-2 shadow transition-colors ${wishlist.some((item: Clothes) => item.id === product.id) ? 'text-pink-500' : 'hover:bg-pink-500 hover:text-white'}`}
                     aria-label="Add to Wishlist"
                   >
-                    <HeartIcon className="h-5 w-5" />
+                    <HeartIcon className="h-5 w-5" fill={wishlist.some((item: Clothes) => item.id === product.id) ? '#ec4899' : 'none'} />
                   </button>
                   <button
                     onClick={() => openModal(product)}
