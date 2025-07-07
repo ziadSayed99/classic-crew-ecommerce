@@ -2,7 +2,7 @@ import Navbar from '../../components/Navbar';
 
 function EditProfilePage() {
   return (
-    <div className="min-h-screen bg-gray-50 pt-8 pb-16">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       <section className="py-8 px-2 sm:px-4 md:px-8 max-w-3xl mx-auto mt-24">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">Edit Profile</h2>

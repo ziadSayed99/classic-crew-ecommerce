@@ -33,7 +33,7 @@ function ProductsPage() {
   }, [location.search]);
 
   return (
-    <>
+    <div className="bg-gray-50 min-h-screen">
       <header className="mb-12">
         <Navbar />
       </header>
@@ -43,7 +43,7 @@ function ProductsPage() {
       <footer>
         <Footer />
       </footer>
-    </>
+    </div>
   );
 }
 

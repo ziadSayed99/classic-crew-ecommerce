@@ -26,7 +26,7 @@ function Body() {
 
   return (
     <div>
-      <div className="bg-white">
+      <div className="bg-gra-50">
         <h2 className="text-xl lg:text-4xl  font-playfair text-black text-center mt-5">
           Shop by Category.
         </h2>

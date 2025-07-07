@@ -60,11 +60,6 @@ function AccountImg() {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/order-history" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
-                        <span className="text-gray-700">Order History</span>
-                      </Link>
-                    </li>
-                    <li>
                       <Link to="/wishlist" className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
                         <span className="text-gray-700">Wishlist</span>
                       </Link>

@@ -30,7 +30,7 @@ function HomePage() {
   // }, []);
 
   return (
-    <div className="bg-white dark:bg-custom-black">
+    <div className="bg-gray-50">
       <Helmet>
         <meta charSet="utf-8" />
         <title>E-commerce</title>

@@ -11,9 +11,9 @@ const WishlistPage: React.FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <section className="py-8 px-2 sm:px-4 md:px-8 max-w-3xl mx-auto mt-24 min-h-screen bg-gray-50">
+      <section className="py-8 px-2 sm:px-4 md:px-8 max-w-3xl mx-auto mt-24">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">My Wishlist</h2>
         {wishlist.length === 0 ? (
           <div className="text-center text-gray-500">Your wishlist is empty.</div>
@@ -45,7 +45,7 @@ const WishlistPage: React.FC = () => {
           </div>
         )}
       </section>
-    </>
+    </div>
   );
 };
 
