@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Mock cn utility function since we can't import it
 const cn = (...classes: (string | undefined | null | false)[]) => {
@@ -130,12 +131,7 @@ function HeroSection() {
     return () => clearInterval(interval);
   }, [current]);
 
-  // Custom Link component to replace react-router-dom Link
-  const Link = ({ to, children }: { to: string; children: React.ReactNode }) => (
-    <a href={to} className="no-underline text-inherit">
-      {children}
-    </a>
-  );
+
 
   return (
     <div className="relative h-screen min-h-[500px] w-full overflow-hidden">
