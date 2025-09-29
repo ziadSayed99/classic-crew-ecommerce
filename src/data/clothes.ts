@@ -11,4 +11,5 @@ export interface Clothes {
   image: string;
   description: string;
   sticker:string;
+  categoryName: string;
 }

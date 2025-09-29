@@ -15,6 +15,7 @@ function ProductsPage() {
     const params = new URLSearchParams(location.search); // Use location.search
     const newCategoryName = params.get("name");
     const sticker = params.get("sticker");
+    console.log(newCategoryName);
 
     if (sticker) {
       setCategoryName("");

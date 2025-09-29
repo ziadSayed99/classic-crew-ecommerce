@@ -9,7 +9,8 @@ export const products: Clothes[] = [
     image: "/assets/products/men_basic_black.jpeg",
     description:
       "Premium cotton basic black t-shirt with a comfortable fit. Perfect for everyday wear and casual occasions.",
-    sticker: "NEW"
+    sticker: "NEW",
+    categoryName:"T-Shirt"
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ export const products: Clothes[] = [
     image: "/assets/products/men_polo.jpeg",
     description:
       "Classic polo t-shirt made from breathable cotton blend. Features a collared design perfect for smart-casual looks.",
-    sticker: "NEW"
+    sticker: "NEW",
+    categoryName:"T-Shirt"
   },
   {
     id: 3,
@@ -29,7 +31,8 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_tshirt.jpeg",
     description:
       "Comfortable and durable t-shirt designed specifically for kids. Made from soft cotton for all-day comfort.",
-    sticker: ""
+    sticker: "",
+    categoryName:"T-Shirt"
   },
   {
     id: 4,
@@ -39,7 +42,8 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_shirt.jpeg",
     description:
       "Stylish casual shirt for kids with a modern design. Perfect for school, parties, and everyday activities.",
-    sticker: "BEST SELLER"
+    sticker: "BEST SELLER",
+    categoryName:"Shirt"
   },
   {
     id: 5,
@@ -49,7 +53,8 @@ export const products: Clothes[] = [
     image: "/assets/products/men_shirt_blue.jpeg",
     description:
       "Elegant blue shirt with a professional look. Made from high-quality cotton blend for comfort and style.",
-    sticker: "BEST SELLER"
+    sticker: "BEST SELLER",
+    categoryName:"Shirt"
   },
   {
     id: 6,
@@ -59,7 +64,8 @@ export const products: Clothes[] = [
     image: "/assets/products/men_jeans.jpeg",
     description:
       "Classic fit jeans with a modern touch. Durable denim construction with comfortable stretch for everyday wear.",
-    sticker: ""
+    sticker: "",
+    categoryName:"Jeans"
   },
   {
     id: 7,
@@ -69,7 +75,8 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_sweater.jpeg",
     description:
       "Warm and cozy sweater perfect for cooler weather. Soft knit material that's gentle on children's skin.",
-    sticker: ""
+    sticker: "",
+    categoryName:"Sweater"
   },
   {
     id: 8,
@@ -79,7 +86,8 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_short.jpeg",
     description:
       "Comfortable shorts ideal for active kids. Lightweight and breathable fabric perfect for playtime and sports.",
-    sticker: "NEW"
+    sticker: "NEW",
+    categoryName:"Shorts"
   },
   {
     id: 9,
@@ -89,7 +97,8 @@ export const products: Clothes[] = [
     image: "/assets/products/men_shirt_black.jpeg",
     description:
       "Sophisticated black sweater with a sleek design. Versatile piece that transitions from office to evening wear.",
-    sticker: ""
+    sticker: "",
+    categoryName:"Sweater"
   },
   {
     id: 10,
@@ -99,7 +108,8 @@ export const products: Clothes[] = [
     image: "/assets/products/men_longsleeve.jpeg",
     description:
       "Premium long sleeve shirt with a refined fit. Perfect for professional settings and formal occasions.",
-    sticker: "NEW"
+    sticker: "NEW",
+    categoryName:"Shirt"
   },
   {
     id: 11,
@@ -109,7 +119,8 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_dress.jpeg",
     description:
       "Adorable dress perfect for special occasions. Made from comfortable fabric with a charming design.",
-    sticker: "BEST SELLER"
+    sticker: "BEST SELLER",
+    categoryName:"Dress"
   },
   {
     id: 12,
@@ -119,7 +130,8 @@ export const products: Clothes[] = [
     image: "/assets/products/kids_jacket.jpeg",
     description:
       "Stylish jacket that provides warmth and protection. Lightweight design perfect for transitional weather.",
-    sticker: "NEW"
+    sticker: "NEW",
+    categoryName:"Jacket"
   },
   {
     id: 13,
@@ -129,6 +141,7 @@ export const products: Clothes[] = [
     image: "/assets/products/jeans_kids.jpeg",
     description:
       "Durable kids jeans with a comfortable fit. Made from quality denim that withstands active play.",
-    sticker: "BEST SELLER"
+    sticker: "BEST SELLER",
+    categoryName:"Jeans"
   },
 ];

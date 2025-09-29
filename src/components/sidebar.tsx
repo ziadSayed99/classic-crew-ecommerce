@@ -29,13 +29,13 @@ const sortOptions = [
   { name: "Price: High to Low", value: "price-desc", current: false },
 ];
 const subCategories = [
-  { name: "T-Shirt" },
-  { name: "Shirt" },
-  { name: "Jeans" },
-  { name: "Sweater" },
-  { name: "Shorts" },
-  { name: "Dress" },
-  { name: "Jacket" },
+  { name: "T-Shirt", value:"t-shirt" },
+  { name: "Shirt", value:"shirt" },
+  { name: "Jeans", value:"jeans" },
+  { name: "Sweater", value:"sweater" },
+  { name: "Shorts",value:"shorts" },
+  { name: "Dress", value:"dress" },
+  { name: "Jacket", value:"jacket" },
 ];
 const filters = [
   {
@@ -60,21 +60,20 @@ function SideBar({ products }: { products: Clothes[] }) {
   const [selectedStickers, setSelectedStickers] = useState<string[]>([]);
 
   useEffect(() => {
-    let filteredProducts =
-      selectedCategories.length > 0
-        ? products.filter((product) =>
-            selectedCategories.some((category) =>
-              product.name.toLowerCase().includes(category.toLowerCase())
-            )
-          )
-        : products;
-
+    let filteredProducts = products;
+  
+    if (selectedCategories.length > 0) {
+      filteredProducts = filteredProducts.filter(product =>
+        selectedCategories.includes(product.categoryName) // must match product data
+      );
+    }
+  
     if (selectedStickers.length > 0) {
-      filteredProducts = filteredProducts.filter((product) =>
+      filteredProducts = filteredProducts.filter(product =>
         selectedStickers.includes(product.sticker)
       );
     }
-
+  
     let newSortedProducts = [...filteredProducts];
     switch (currentSort) {
       case "price-asc":
@@ -88,30 +87,32 @@ function SideBar({ products }: { products: Clothes[] }) {
         break;
       case "popular":
         newSortedProducts.sort((a, b) => {
-          if (a.sticker === "BEST SELLER" && b.sticker !== "BEST SELLER")
-            return -1;
-          if (a.sticker !== "BEST SELLER" && b.sticker === "BEST SELLER")
-            return 1;
+          if (a.sticker === "BEST SELLER" && b.sticker !== "BEST SELLER") return -1;
+          if (a.sticker !== "BEST SELLER" && b.sticker === "BEST SELLER") return 1;
           return 0;
         });
         break;
-      default:
-        break;
     }
+  
     setSortedProducts(newSortedProducts);
   }, [currentSort, products, selectedCategories, selectedStickers]);
+  
+
+  const handleCategoryToggle = (categoryName: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(categoryName)
+        ? prev.filter((c) => c !== categoryName) // remove if already selected
+        : [...prev, categoryName]               // add if not selected
+    );
+  };
+
+  console.log(selectedCategories);
+
 
   const handleSortChange = (sortValue: string) => {
     setCurrentSort(sortValue);
   };
 
-  const handleCategoryToggle = (categoryName: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(categoryName)
-        ? prev.filter((c) => c !== categoryName)
-        : [...prev, categoryName]
-    );
-  };
 
   const handleStickerChange = (stickerValue: string, isChecked: boolean) => {
     setSelectedStickers((prev) =>
@@ -159,11 +160,12 @@ function SideBar({ products }: { products: Clothes[] }) {
                   {subCategories.map((category) => (
                     <li key={category.name}>
                       <button
+                      type="button" 
                         onClick={() => handleCategoryToggle(category.name)}
                         className={`block px-2 py-3 ${
                           selectedCategories.includes(category.name)
                             ? "text-indigo-600"
-                            : ""
+                            : "text-gray-900"
                         }`}
                       >
                         {category.name}
@@ -303,6 +305,7 @@ function SideBar({ products }: { products: Clothes[] }) {
                     {subCategories.map((category) => (
                       <li key={category.name}>
                         <button
+                         type="button" 
                           onClick={() => handleCategoryToggle(category.name)}
                           className={
                             selectedCategories.includes(category.name)
